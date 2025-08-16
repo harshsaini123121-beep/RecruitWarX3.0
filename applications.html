@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Applications - RecruitWarX Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="candidate-dashboard.html"><i class="fas fa-briefcase me-2"></i>RecruitWarX</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="jobs.html"><i class="fas fa-search me-1"></i>Find Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="applications.html"><i class="fas fa-paper-plane me-1"></i>My
+                            Applications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html"><i class="fas fa-user me-1"></i>Profile</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-bell me-1"></i>Notifications</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>Harsh Saini
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="handlers/logout.php"><i
+                                        class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="dashboard-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="dashboard-title">My Applications</h1>
+                    <p class="dashboard-subtitle">Track your job applications and their progress</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <a href="jobs.html" class="btn btn-light d-inline-flex align-items-center">
+                        <i class="fas fa-plus me-2"></i>
+                        <span>Apply to More Jobs</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <!-- Filter Tabs -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <ul class="nav nav-pills justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-filter="all">All Applications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-filter="applied">Applied</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-filter="screening">Screening</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-filter="interview">Interview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-filter="offer">Offer</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Applications List -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Job Title</th>
+                                        <th>Company</th>
+                                        <th>Applied Date</th>
+                                        <th>Status</th>
+                                        <th>Last Update</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-status="interview">
+                                        <td>
+                                            <div>
+                                                <strong>Senior Software Engineer</strong>
+                                                <br><small class="text-muted">Full-time • Remote</small>
+                                            </div>
+                                        </td>
+                                        <td>Tata Consultancy Services.</td>
+                                        <td>Jan 15, 2024</td>
+                                        <td><span class="status-badge status-pending">Interview Scheduled</span></td>
+                                        <td>2 hours ago</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-sm btn-outline-primary" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-info" title="Message">
+                                                    <i class="fas fa-envelope"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-status="screening">
+                                        <td>
+                                            <div>
+                                                <strong>Frontend Developer</strong>
+                                                <br><small class="text-muted">Full-time • India</small>
+                                            </div>
+                                        </td>
+                                        <td>Infosys, Bengaluru</td>
+                                        <td>Jan 12, 2024</td>
+                                        <td><span class="status-badge status-active">Under Review</span></td>
+                                        <td>1 day ago</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-sm btn-outline-primary" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-info" title="Message">
+                                                    <i class="fas fa-envelope"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-status="applied">
+                                        <td>
+                                            <div>
+                                                <strong>Full Stack Developer</strong>
+                                                <br><small class="text-muted">Contract • Pune</small>
+                                            </div>
+                                        </td>
+                                        <td>Wipro, Bengaluru</td>
+                                        <td>Jan 10, 2024</td>
+                                        <td><span class="status-badge status-rejected">Not Selected</span></td>
+                                        <td>3 days ago</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-sm btn-outline-primary" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary" title="Feedback">
+                                                    <i class="fas fa-comment"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-status="applied">
+                                        <td>
+                                            <div>
+                                                <strong>React Developer</strong>
+                                                <br><small class="text-muted">Full-time • Goa</small>
+                                            </div>
+                                        </td>
+                                        <td>Tech Mahindra, Pune</td>
+                                        <td>Jan 8, 2024</td>
+                                        <td><span class="status-badge status-active">Applied</span></td>
+                                        <td>5 days ago</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-sm btn-outline-primary" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" title="Withdraw">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-status="offer">
+                                        <td>
+                                            <div>
+                                                <strong>UI/UX Designer</strong>
+                                                <br><small class="text-muted">Full-time • Remote</small>
+                                            </div>
+                                        </td>
+                                        <td>Creative Agency</td>
+                                        <td>Jan 5, 2024</td>
+                                        <td><span class="status-badge status-active">Offer Received</span></td>
+                                        <td>1 week ago</td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-sm btn-success" title="Accept Offer">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-primary" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger" title="Decline">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Application Statistics -->
+        <div class="row mt-4">
+            <div class="col-md-3 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number">12</div>
+                    <div class="stats-label">Total Applications</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number">3</div>
+                    <div class="stats-label">In Progress</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number">2</div>
+                    <div class="stats-label">Interviews</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number">1</div>
+                    <div class="stats-label">Offers</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.nav-pills .nav-link').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Update active tab
+                document.querySelectorAll('.nav-pills .nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+
+                // Filter applications
+                const filter = this.dataset.filter;
+                const rows = document.querySelectorAll('tbody tr');
+
+                rows.forEach(row => {
+                    if (filter === 'all' || row.dataset.status === filter) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

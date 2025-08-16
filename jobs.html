@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Jobs - RecruitWarX Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --light-bg: #f8f9fa;
+            --dark-text: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: white !important;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .search-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: fit-content;
+        }
+
+        .filter-section h5 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .job-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .job-title {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .job-company {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .job-detail-item {
+            background: var(--light-bg);
+            color: var(--dark-text);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .btn-outline-primary {
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .pagination .page-link {
+            color: var(--secondary-color);
+            border-color: #dee2e6;
+            border-radius: 8px;
+            margin: 0 2px;
+        }
+
+        .pagination .page-item.active .page-link {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .text-primary {
+            color: var(--secondary-color) !important;
+        }
+
+        .bg-primary {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)) !important;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 2rem 0;
+            }
+            
+            .search-container {
+                padding: 1.5rem;
+            }
+            
+            .job-card .col-md-4 {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="candidate-dashboard.html"><i class="fas fa-briefcase me-2"></i>RecruitWarX</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="candidate-dashboard.html"><i class="fas fa-tachometer-alt me-1"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="jobs.html"><i class="fas fa-search me-1"></i>Find Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="applications.html"><i class="fas fa-file-alt me-1"></i>My Applications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html"><i class="fas fa-user me-1"></i>Profile</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>Harsh Saini
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>My Profile</a></li>
+                            <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="handlers/logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1 class="display-4 fw-bold mb-3">Find Your Dream Job</h1>
+                    <p class="lead mb-4">Discover thousands of job opportunities from top companies worldwide</p>
+                    
+                    <div class="search-container">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                    <input type="text" class="form-control" placeholder="Job title or keywords" id="jobSearch">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                    <input type="text" class="form-control" placeholder="Location" id="locationSearch">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-primary w-100" type="button" id="searchBtn">
+                                    <i class="fas fa-search me-2"></i>Search Jobs
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 mb-4">
+                <div class="filter-section">
+                    <h5><i class="fas fa-filter me-2"></i>Filters</h5>
+                    
+                    <div class="mb-4">
+                        <h6 class="fw-semibold mb-3">Job Type</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="full-time" id="fullTime">
+                            <label class="form-check-label" for="fullTime">Full-time</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="part-time" id="partTime">
+                            <label class="form-check-label" for="partTime">Part-time</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="contract" id="contract">
+                            <label class="form-check-label" for="contract">Contract</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="freelance" id="freelance">
+                            <label class="form-check-label" for="freelance">Freelance</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="fw-semibold mb-3">Experience Level</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="entry" id="entry">
+                            <label class="form-check-label" for="entry">Entry Level</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="mid" id="mid">
+                            <label class="form-check-label" for="mid">Mid Level</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="senior" id="senior">
+                            <label class="form-check-label" for="senior">Senior Level</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="executive" id="executive">
+                            <label class="form-check-label" for="executive">Executive</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="fw-semibold mb-3">Location Type</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="remote" id="remote">
+                            <label class="form-check-label" for="remote">Remote</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="hybrid" id="hybrid">
+                            <label class="form-check-label" for="hybrid">Hybrid</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="onsite" id="onsite">
+                            <label class="form-check-label" for="onsite">On-site</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="fw-semibold mb-3">Salary Range</h6>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="2-5 LPA" id="salary1">
+                            <label class="form-check-label" for="salary1">2-5 LPA</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="5-10 LPA" id="salary2">
+                            <label class="form-check-label" for="salary2">5-10 LPA</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="10-15 LPA" id="salary3">
+                            <label class="form-check-label" for="salary3">10-15 LPA</label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="15 LPA+" id="salary4">
+                            <label class="form-check-label" for="salary4">15 LPA+</label>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline-primary w-100 mb-2" id="applyFilters">Apply Filters</button>
+                    <button class="btn btn-outline-secondary w-100" id="clearFilters">Clear All</button>
+                </div>
+            </div>
+
+            <div class="col-lg-9 job-listings">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4><span id="jobCount">Loading...</span> Jobs Found</h4>
+                    <div class="d-flex align-items-center">
+                        <label class="me-2">Sort by:</label>
+                        <select class="form-select" id="sortBy" style="width: auto;">
+                            <option>Most Recent</option>
+                            <option>Most Relevant</option>
+                            <option>Salary: High to Low</option>
+                            <option>Salary: Low to High</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="jobsContainer"></div>
+
+                <nav aria-label="Job search pagination">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1">Previous</a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Sample job data
+        const jobsData = [
+            {
+                id: 1,
+                title: "Senior Software Engineer",
+                company: "Tata Consultancy Services (TCS)",
+                location: "Bengaluru, India",
+                type: "part-time",
+                workType: "remote",
+                salary: "₹25–30 LPA",
+                level: "senior",
+                description: "We’re looking for a Senior Software Engineer to join our growing team. You’ll work on cutting-edge projects using React, Node.js, and AWS. Experience with microservices architecture is a plus..",
+                posted: "2 days ago",
+                applicants: 25,
+                icon: "fas fa-laptop-code",
+                iconColor: "bg-primary"
+            },
+            {
+                id: 2,
+                title: "UX/UI Designer",
+                company: "Infosys Digital Experience Studio",
+                location: "Pune, Maharastra",
+                type: "full-time",
+                workType: "hybrid",
+                salary: "₹12–16 LPA",
+                level: "mid",
+                description: "Join our creative team as a UX/UI Designer. You'll design user-centered digital experiences for our clients. Experience with Figma, Adobe Creative Suite, and prototyping tools required.",
+                posted: "1 day ago",
+                applicants: 18,
+                icon: "fas fa-paint-brush",
+                iconColor: "bg-success"
+            },
+            {
+                id: 3,
+                title: "Data Analyst",
+                company: "Wipro Analytics.",
+                location: "Remote (India)",
+                type: "contract",
+                workType: "remote",
+                salary: "₹7–9 LPA",
+                level: "senior",
+                description: "Looking for a Data Analyst to help analyze business metrics and create insightful reports. Experience with SQL, Python, and Tableau required. 6-month contract with possibility of extension.",
+                posted: "3 days ago",
+                applicants: 42,
+                icon: "fas fa-chart-bar",
+                iconColor: "bg-warning"
+            },
+            {
+                id: 4,
+                title: "Junior Frontend Developer",
+                company: "Freshworks",
+                location: "Chennai, Tamil Nadu",
+                type: "full-time",
+                workType: "onsite",
+                salary: "₹5–6.5 LPA",
+                level: "entry",
+                description: "Perfect opportunity for a Junior Frontend Developer to join our innovative startup. You'll work with React, TypeScript, and modern development tools. Great mentorship and growth opportunities.",
+                posted: "1 week ago",
+                applicants: 67,
+                icon: "fas fa-mobile-alt",
+                iconColor: "bg-info"
+            },
+            {
+                id: 5,
+                title: "Product Manager",
+                company: "Amazon",
+                location: "Hyderabad, India",
+                type: "full-time",
+                workType: "hybrid",
+                salary: "₹11–14 LPA",
+                level: "senior",
+                description: "We're seeking an experienced Product Manager to lead our product development initiatives. You'll work closely with engineering, design, and marketing teams to deliver exceptional user experiences.",
+                posted: "4 days ago",
+                applicants: 31,
+                icon: "fas fa-rocket",
+                iconColor: "bg-danger"
+            },
+            {
+                id: 6,
+                title: "DevOps Engineer",
+                company: "Tata Motors",
+                location: "Pune",
+                type: "full-time",
+                workType: "remote",
+                salary: "₹8–10 LPA",
+                level: "mid",
+                description: "Join our DevOps team to help build and maintain scalable cloud infrastructure. Experience with AWS, Docker, Kubernetes, and CI/CD pipelines required.",
+                posted: "5 days ago",
+                applicants: 23,
+                icon: "fas fa-server",
+                iconColor: "bg-secondary"
+            }
+        ];
+
+        let filteredJobs = [...jobsData];
+        let currentFilters = {
+            jobType: [],
+            experienceLevel: [],
+            locationType: [],
+            salaryRange: []
+        };
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            displayJobs(filteredJobs);
+            updateJobCount();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Search functionality
+            document.getElementById('searchBtn').addEventListener('click', performSearchAndFilter);
+            document.getElementById('jobSearch').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') performSearchAndFilter();
+            });
+            document.getElementById('locationSearch').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') performSearchAndFilter();
+            });
+
+            // Filter functionality
+            document.getElementById('applyFilters').addEventListener('click', performSearchAndFilter);
+            document.getElementById('clearFilters').addEventListener('click', clearFilters);
+
+            // Sort functionality
+            document.getElementById('sortBy').addEventListener('change', sortJobs);
+        }
+
+        function performSearchAndFilter() {
+            const jobSearchTerm = document.getElementById('jobSearch').value.toLowerCase();
+            const locationSearchTerm = document.getElementById('locationSearch').value.toLowerCase();
+
+            // Start with the original full dataset
+            let jobsAfterSearch = jobsData.filter(job => {
+                const matchesJob = !jobSearchTerm || 
+                    job.title.toLowerCase().includes(jobSearchTerm) ||
+                    job.company.toLowerCase().includes(jobSearchTerm) ||
+                    job.description.toLowerCase().includes(jobSearchTerm);
+                
+                const matchesLocation = !locationSearchTerm || 
+                    job.location.toLowerCase().includes(locationSearchTerm);
+
+                return matchesJob && matchesLocation;
+            });
+
+            applyCurrentFilters(jobsAfterSearch); // Pass the searched jobs to the filter function
+        }
+
+        function updateFilters() {
+            // Update current filters based on checked checkboxes
+            currentFilters.jobType = getCheckedValues(['fullTime', 'partTime', 'contract', 'freelance']);
+            currentFilters.experienceLevel = getCheckedValues(['entry', 'mid', 'senior', 'executive']);
+            currentFilters.locationType = getCheckedValues(['remote', 'hybrid', 'onsite']);
+            // FIX: Match the values from the HTML checkboxes
+            currentFilters.salaryRange = getCheckedValues(['salary1', 'salary2', 'salary3', 'salary4']);
+        }
+        
+        function getCheckedValues(checkboxIds) {
+            return checkboxIds
+                .filter(id => document.getElementById(id).checked)
+                .map(id => document.getElementById(id).value);
+        }
+
+        function applyFilters() {
+            performSearchAndFilter();
+        }
+
+        function applyCurrentFilters(jobsToFilter) {
+            updateFilters(); // Get the latest state of the checkboxes
+
+            filteredJobs = jobsToFilter.filter(job => {
+                const matchesJobType = currentFilters.jobType.length === 0 || 
+                    currentFilters.jobType.includes(job.type);
+                
+                const matchesExperience = currentFilters.experienceLevel.length === 0 || 
+                    currentFilters.experienceLevel.includes(job.level);
+                
+                const matchesLocation = currentFilters.locationType.length === 0 || 
+                    currentFilters.locationType.includes(job.workType);
+
+                // FIX: Implemented the salary filtering logic
+                const matchesSalary = currentFilters.salaryRange.length === 0 || 
+                    checkSalaryMatch(job.salary, currentFilters.salaryRange);
+
+                return matchesJobType && matchesExperience && matchesLocation && matchesSalary;
+            });
+            
+            // After filtering, update the display
+            sortJobs(); // This will also call displayJobs
+            updateJobCount();
+        }
+
+        function checkSalaryMatch(jobSalary, selectedRanges) {
+            const jobSalNum = extractSalaryNumber(jobSalary); // e.g., 25 from "₹25–30 LPA"
+            if (jobSalNum === 0) return false;
+
+            return selectedRanges.some(range => {
+                if (range.includes('+')) { // Handles "15 LPA+"
+                    const minSal = parseInt(range.replace(/\D/g, ''));
+                    return jobSalNum >= minSal;
+                } else { // Handles "2-5 LPA"
+                    const [minSal, maxSal] = range.split(' ')[0].split('-').map(Number);
+                    return jobSalNum >= minSal && jobSalNum <= maxSal;
+                }
+            });
+        }
+
+        function clearFilters() {
+            // Uncheck all filter checkboxes
+            const filterCheckboxes = document.querySelectorAll('.filter-section input[type="checkbox"]');
+            filterCheckboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Clear search fields
+            document.getElementById('jobSearch').value = '';
+            document.getElementById('locationSearch').value = '';
+
+            // Reset filters object
+            currentFilters = {
+                jobType: [], experienceLevel: [], locationType: [], salaryRange: []
+            };
+
+            // Reset filtered jobs to the original full list and update the display
+            filteredJobs = [...jobsData];
+            sortJobs();
+            updateJobCount();
+        }
+
+        function sortJobs() {
+            const sortBy = document.getElementById('sortBy').value;
+            
+            switch(sortBy) {
+                case 'Most Recent':
+                    // This is placeholder logic. For real sorting, you'd need actual date objects.
+                    filteredJobs.sort((a, b) => (a.id > b.id ? -1 : 1)); // Simple sort for demo
+                    break;
+                case 'Most Relevant':
+                    // Placeholder for relevance sorting
+                    break;
+                case 'Salary: High to Low':
+                    filteredJobs.sort((a, b) => {
+                        const salaryA = extractSalaryNumber(a.salary);
+                        const salaryB = extractSalaryNumber(b.salary);
+                        return salaryB - salaryA;
+                    });
+                    break;
+                case 'Salary: Low to High':
+                    filteredJobs.sort((a, b) => {
+                        const salaryA = extractSalaryNumber(a.salary);
+                        const salaryB = extractSalaryNumber(b.salary);
+                        return salaryA - salaryB;
+                    });
+                    break;
+            }
+
+            displayJobs(filteredJobs);
+        }
+
+        function extractSalaryNumber(salaryString) {
+            // Extract the first number from salary string for sorting
+            const match = salaryString.match(/[\d.]+/);
+            return match ? parseFloat(match[0]) : 0;
+        }
+
+        function displayJobs(jobs) {
+            const container = document.getElementById('jobsContainer');
+            
+            if (jobs.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">No jobs found</h4>
+                        <p class="text-muted">Try adjusting your search criteria or filters</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = jobs.map(job => `
+                <div class="job-card card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="d-flex align-items-start mb-2">
+                                    <div class="me-3">
+                                        <div class="${job.iconColor} rounded d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                            <i class="${job.icon} text-white fa-lg"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h5 class="job-title mb-1">${job.title}</h5>
+                                        <p class="job-company mb-2">${job.company} • ${job.location}</p>
+                                        <div class="job-details">
+                                            <span class="job-detail-item">${job.type.charAt(0).toUpperCase() + job.type.slice(1).replace('-', '-')}</span>
+                                            <span class="job-detail-item">${job.workType.charAt(0).toUpperCase() + job.workType.slice(1)}</span>
+                                            <span class="job-detail-item">${job.salary}</span>
+                                            <span class="job-detail-item">${job.level.charAt(0).toUpperCase() + job.level.slice(1)} Level</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="job-description text-muted mb-3">
+                                    ${job.description}
+                                </p>
+                                <div class="d-flex align-items-center text-muted">
+                                    <small><i class="fas fa-clock me-1"></i>Posted ${job.posted}</small>
+                                    <small class="ms-3"><i class="fas fa-users me-1"></i>${job.applicants} applicants</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex flex-column justify-content-center align-items-end">
+                                <button class="btn btn-primary mb-2 w-100" style="max-width: 150px;" onclick="applyToJob(${job.id})">
+                                    <i class="fas fa-paper-plane me-2"></i>Apply Now
+                                </button>
+                                <button class="btn btn-outline-primary w-100" style="max-width: 150px;" onclick="saveJob(${job.id})">
+                                    <i class="fas fa-heart me-2"></i>Save Job
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateJobCount() {
+            document.getElementById('jobCount').textContent = filteredJobs.length.toLocaleString();
+        }
+
+        function applyToJob(jobId) {
+            alert(`Applying to job ID: ${jobId}`);
+        }
+
+        function saveJob(jobId) {
+            alert(`Job ID: ${jobId} saved to your favorites!`);
+        }
+    </script>
+</body>
+</html>
