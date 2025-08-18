@@ -6,7 +6,113 @@
     <title>My Profile - RecruitWarX Portal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #31485d;
+            --secondary-color: #3289c3;
+            --light-bg: #f8f9fa;
+            --dark-text: #2c3e50;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #ecf0f1 !important;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2rem;
+        }
+
+        .card-header {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 12px 12px 0 0 !important;
+            padding: 1.25rem 1.5rem;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+        }
+
+        .btn-light {
+            background: white;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+
+        .btn-light:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            padding: 12px;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 0.2rem rgba(50, 137, 195, 0.25);
+        }
+
+        .progress-bar {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+
+        .skill-tag {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .experience-item, .education-item {
+            border-left: 3px solid var(--secondary-color);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -27,6 +133,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="profile.html"><i class="fas fa-user me-1"></i>Profile</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resume.html"><i class="fas fa-file-alt me-1"></i>Resume</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -34,7 +143,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            <i class="fas fa-user-circle me-1"></i>Harsh Saini
+                            <i class="fas fa-user-circle me-1"></i><span id="navUserName">Loading...</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
@@ -73,25 +182,28 @@
                     <div class="card-body text-center">
                         <div class="mb-3">
                             <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 100px; height: 100px;">
-                                <i class="fas fa-user fa-3x text-white"></i>
+                                <span id="profileInitials" class="text-white" style="font-size: 2rem; font-weight: bold;">HS</span>
                             </div>
                         </div>
-                        <h4>Harsh Saini</h4>
-                        <p class="text-muted">Software Developer</p>
-                        <p class="text-muted"><i class="fas fa-map-marker-alt me-1"></i>Jaipur, Rajasthan</p>
+                        <h4 id="profileName">Loading...</h4>
+                        <p class="text-muted" id="profileRole">Loading...</p>
+                        <p class="text-muted"><i class="fas fa-map-marker-alt me-1"></i><span id="profileLocation">Loading...</span></p>
                         
                         <div class="mb-3">
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Profile Completion</span>
-                                <span class="text-primary fw-bold">85%</span>
+                                <span class="text-primary fw-bold" id="profileCompletion">0%</span>
                             </div>
                             <div class="progress" style="height: 8px;">
-                                <div class="progress-bar" role="progressbar" style="width: 85%"></div>
+                                <div class="progress-bar" role="progressbar" style="width: 0%" id="profileProgressBar"></div>
                             </div>
                         </div>
                         
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary">
+                            <a href="resume.html" class="btn btn-primary">
+                                <i class="fas fa-file-alt me-2"></i>View Resume
+                            </a>
+                            <button class="btn btn-primary" onclick="downloadResume()">
                                 <i class="fas fa-download me-2"></i>Download Resume
                             </button>
                             <button class="btn btn-outline-primary">
@@ -109,19 +221,19 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between mb-2">
                             <span>Profile Views</span>
-                            <strong>156</strong>
+                            <strong id="profileViews">0</strong>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <span>Applications Sent</span>
-                            <strong>12</strong>
+                            <strong id="applicationsSent">0</strong>
                         </div>
                         <div class="d-flex justify-content-between mb-2">
                             <span>Interview Invites</span>
-                            <strong>3</strong>
+                            <strong id="interviewInvites">0</strong>
                         </div>
                         <div class="d-flex justify-content-between">
                             <span>Response Rate</span>
-                            <strong>25%</strong>
+                            <strong id="responseRate">0%</strong>
                         </div>
                     </div>
                 </div>
@@ -139,30 +251,30 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">First Name</label>
-                                    <input type="text" class="form-control" value="Harsh" readonly>
+                                    <input type="text" class="form-control" id="firstName" name="first_name" readonly>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" value="Saini" readonly>
+                                    <input type="text" class="form-control" id="lastName" name="last_name" readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Email</label>
-                                    <input type="email" class="form-control" value="harsh@1234.com" readonly>
+                                    <input type="email" class="form-control" id="email" name="email" readonly>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Phone</label>
-                                    <input type="tel" class="form-control" value="+91 0000000000" readonly>
+                                    <input type="tel" class="form-control" id="phone" name="phone" readonly>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Location</label>
-                                <input type="text" class="form-control" value="Jaipur, Rajasthan" readonly>
+                                <input type="text" class="form-control" id="location" name="location" readonly>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Professional Summary</label>
-                                <textarea class="form-control" rows="4" readonly>Experienced software developer with 5+ years in full-stack development. Passionate about creating efficient, scalable solutions using modern technologies like Java Script, Bootstrap, Java, and Python.</textarea>
+                                <textarea class="form-control" rows="4" id="bio" name="bio" readonly></textarea>
                             </div>
                         </form>
                     </div>
@@ -174,39 +286,8 @@
                         <h5 class="mb-0"><i class="fas fa-briefcase me-2"></i>Work Experience</h5>
                     </div>
                     <div class="card-body">
-                        <div class="experience-item mb-4">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <h6 class="mb-1">Senior Software Developer</h6>
-                                    <p class="text-muted mb-1">Infosys • Bengaluru, Karnataka</p>
-                                    <p class="text-muted mb-2">Jan 2022 - Present</p>
-                                    <p class="mb-0">Led the development of microservices architecture, enhancing system performance by approximately 40%. Mentored junior developers and worked closely with cross-functional teams to drive project delivery.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="experience-item mb-4">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <h6 class="mb-1">Full Stack Developer</h6>
-                                    <p class="text-muted mb-1">Tech Mahindra • Pune, Maharashtra</p>
-                                    <p class="text-muted mb-2">Jun 2020 - Dec 2021</p>
-                                    <p class="mb-0">Designed and maintained web applications using Java and Node.js. Implemented CI/CD pipelines, boosting deployment efficiency by around 60%.
-(Tech Mahindra, headquartered in Pune, excels in software engineering and digital transformation across telecom, healthcare, and banking.) </p>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="experience-item">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <h6 class="mb-1">Junior Developer</h6>
-                                    <p class="text-muted mb-1">Freshworks • Chennai, Tamil Nadu</p>
-                                    <p class="text-muted mb-2">Mar 2019 - May 2020</p>
-                                    <p class="mb-0">Built responsive web applications and coordinated with design teams to ensure user-friendly interfaces.
-(Freshworks began in Chennai as Freshdesk and has grown into a prominent SaaS company delivering CRM and ITSM tools.)</p>
-                                </div>
-                            </div>
+                        <div id="workExperienceContainer">
+                            <p class="text-muted">No work experience added yet. <a href="resume.html">Add your experience</a></p>
                         </div>
                     </div>
                 </div>
@@ -217,40 +298,8 @@
                         <h5 class="mb-0"><i class="fas fa-code me-2"></i>Skills</h5>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>Programming Languages</h6>
-                                <div class="mb-3">
-                                    <span class="job-detail-item me-2 mb-2">JavaScript</span>
-                                    <span class="job-detail-item me-2 mb-2">Python</span>
-                                    <span class="job-detail-item me-2 mb-2">PhP</span>
-                                    <span class="job-detail-item me-2 mb-2">Java</span>
-                                </div>
-                                
-                                <h6>Frameworks & Libraries</h6>
-                                <div class="mb-3">
-                                    <span class="job-detail-item me-2 mb-2">React</span>
-                                    <span class="job-detail-item me-2 mb-2">Node.js</span>
-                                    <span class="job-detail-item me-2 mb-2">Express</span>
-                                    <span class="job-detail-item me-2 mb-2">Django</span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <h6>Tools & Technologies</h6>
-                                <div class="mb-3">
-                                    <span class="job-detail-item me-2 mb-2">Git</span>
-                                    <span class="job-detail-item me-2 mb-2">Docker</span>
-                                    <span class="job-detail-item me-2 mb-2">AWS</span>
-                                    <span class="job-detail-item me-2 mb-2">MongoDB</span>
-                                </div>
-                                
-                                <h6>Databases</h6>
-                                <div class="mb-3">
-                                    <span class="job-detail-item me-2 mb-2">MySQL</span>
-                                    <span class="job-detail-item me-2 mb-2">PostgreSQL</span>
-                                    <span class="job-detail-item me-2 mb-2">Redis</span>
-                                </div>
-                            </div>
+                        <div id="skillsContainer">
+                            <p class="text-muted">No skills added yet. <a href="resume.html">Add your skills</a></p>
                         </div>
                     </div>
                 </div>
@@ -261,11 +310,8 @@
                         <h5 class="mb-0"><i class="fas fa-graduation-cap me-2"></i>Education</h5>
                     </div>
                     <div class="card-body">
-                        <div class="education-item">
-                            <h6 class="mb-1">Bachelor of Technology.</h6>
-                            <p class="text-muted mb-1">Swami Keshvanand Institute of Technology, Management & Gramothan (SKIT)</p>
-                            <p class="text-muted mb-2">2024 - 2028</p>
-                            <p class="mb-0"> Relevant coursework:Artificial Intelligence, Data Structures, Algorithms, Software Engineering, Database Systems.</p>
+                        <div id="educationContainer">
+                            <p class="text-muted">No education added yet. <a href="resume.html">Add your education</a></p>
                         </div>
                     </div>
                 </div>
@@ -274,8 +320,110 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProfile();
+            loadStats();
+        });
+
+        async function loadProfile() {
+            try {
+                const response = await fetch('handlers/profile_handler.php?action=get_profile');
+                const result = await response.json();
+                
+                if (result.success) {
+                    const profile = result.profile;
+                    
+                    document.getElementById('navUserName').textContent = profile.first_name + ' ' + profile.last_name;
+                    document.getElementById('profileName').textContent = profile.first_name + ' ' + profile.last_name;
+                    document.getElementById('profileInitials').textContent = (profile.first_name.charAt(0) + profile.last_name.charAt(0)).toUpperCase();
+                    document.getElementById('profileRole').textContent = profile.role.charAt(0).toUpperCase() + profile.role.slice(1).replace('_', ' ');
+                    document.getElementById('profileLocation').textContent = profile.location || 'Not specified';
+                    
+                    document.getElementById('firstName').value = profile.first_name;
+                    document.getElementById('lastName').value = profile.last_name;
+                    document.getElementById('email').value = profile.email;
+                    document.getElementById('phone').value = profile.phone || '';
+                    document.getElementById('location').value = profile.location || '';
+                    document.getElementById('bio').value = profile.bio || '';
+                    
+                    const completion = profile.profile_completion || 0;
+                    document.getElementById('profileCompletion').textContent = completion + '%';
+                    document.getElementById('profileProgressBar').style.width = completion + '%';
+                    
+                    if (profile.work_experience) {
+                        displayWorkExperience(JSON.parse(profile.work_experience));
+                    }
+                    
+                    if (profile.skills) {
+                        displaySkills(profile.skills);
+                    }
+                    
+                    if (profile.education) {
+                        displayEducation(JSON.parse(profile.education));
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading profile:', error);
+            }
+        }
+
+        async function loadStats() {
+            try {
+                const response = await fetch('handlers/profile_handler.php?action=get_stats');
+                const result = await response.json();
+                
+                if (result.success) {
+                    const stats = result.stats;
+                    document.getElementById('profileViews').textContent = stats.profile_views || 0;
+                    document.getElementById('applicationsSent').textContent = stats.applications_sent || 0;
+                    document.getElementById('interviewInvites').textContent = stats.interviews_scheduled || 0;
+                    document.getElementById('responseRate').textContent = (stats.response_rate || 0) + '%';
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
+
+        function displayWorkExperience(experiences) {
+            const container = document.getElementById('workExperienceContainer');
+            if (experiences.length === 0) return;
+            
+            container.innerHTML = experiences.map(exp => `
+                <div class="experience-item mb-4">
+                    <h6 class="mb-1">${exp.jobTitle}</h6>
+                    <p class="text-muted mb-1">${exp.company}</p>
+                    <p class="text-muted mb-2">${exp.startDate} - ${exp.endDate}</p>
+                    <p class="mb-0">${exp.description}</p>
+                </div>
+            `).join('<hr>');
+        }
+
+        function displaySkills(skillsString) {
+            const container = document.getElementById('skillsContainer');
+            const skills = skillsString.split(',').map(s => s.trim()).filter(s => s);
+            
+            if (skills.length === 0) return;
+            
+            container.innerHTML = skills.map(skill => 
+                `<span class="skill-tag">${skill}</span>`
+            ).join('');
+        }
+
+        function displayEducation(education) {
+            const container = document.getElementById('educationContainer');
+            if (education.length === 0) return;
+            
+            container.innerHTML = education.map(edu => `
+                <div class="education-item mb-3">
+                    <h6 class="mb-1">${edu.degree}</h6>
+                    <p class="text-muted mb-1">${edu.institution}</p>
+                    <p class="text-muted mb-2">${edu.year}</p>
+                    ${edu.grade ? `<p class="mb-0">Grade: ${edu.grade}</p>` : ''}
+                </div>
+            `).join('');
+        }
+
         // Edit profile functionality
         document.getElementById('editProfileBtn').addEventListener('click', function() {
             const inputs = document.querySelectorAll('#personalInfoForm input, #personalInfoForm textarea');
@@ -289,16 +437,52 @@
                 this.classList.add('btn-success');
             } else {
                 // Save changes
+                saveProfile();
                 inputs.forEach(input => input.setAttribute('readonly', true));
                 this.innerHTML = '<i class="fas fa-edit me-2"></i>Edit Profile';
                 this.classList.remove('btn-success');
                 this.classList.add('btn-light');
-                
-                // Show success message
-                const portal = new RecruitmentPortal();
-                portal.showMessage('Profile updated successfully!', 'success');
             }
         });
+
+        async function saveProfile() {
+            const formData = new FormData();
+            formData.append('action', 'update_profile');
+            formData.append('first_name', document.getElementById('firstName').value);
+            formData.append('last_name', document.getElementById('lastName').value);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('phone', document.getElementById('phone').value);
+            formData.append('location', document.getElementById('location').value);
+            formData.append('bio', document.getElementById('bio').value);
+            
+            try {
+                const response = await fetch('handlers/profile_handler.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                showMessage(result.message, result.success ? 'success' : 'error');
+            } catch (error) {
+                showMessage('Error updating profile', 'error');
+            }
+        }
+
+        function downloadResume() {
+            window.open('resume.html', '_blank');
+        }
+
+        function showMessage(message, type) {
+            const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+            const alertHtml = `
+                <div class="alert ${alertClass} alert-dismissible fade show position-fixed" 
+                     style="top: 20px; right: 20px; z-index: 9999; min-width: 300px;">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', alertHtml);
+        }
     </script>
 </body>
 </html>

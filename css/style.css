@@ -1,9 +1,9 @@
 :root {
-    --primary-blue: #1e3a8a;
-    --secondary-blue: #2563eb;
-    --light-blue: #e0f2fe;
-    --dark-blue: #1e40af;
-    --accent-blue: #3b82f6;
+    --primary-blue: #31485d;
+    --secondary-blue: #3289c3;
+    --light-blue: #e8f4f8;
+    --dark-blue: #2a3f52;
+    --accent-blue: #4a9bc7;
     --success-green: #10b981;
     --warning-orange: #f59e0b;
     --danger-red: #ef4444;
@@ -31,7 +31,7 @@ body {
 
 /* Custom Blue Theme */
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+    background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
     border: none;
     border-radius: 10px;
     padding: 12px 24px;
@@ -44,7 +44,7 @@ body {
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(30, 58, 138, 0.3);
-    background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+    background: linear-gradient(to right, var(--secondary-blue), var(--primary-blue));
 }
 
 .btn-outline-primary {
@@ -65,7 +65,7 @@ body {
 
 /* Navigation */
 .navbar {
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+    background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
     box-shadow: 0 2px 20px rgba(30, 58, 138, 0.15);
     padding: 1rem 0;
     backdrop-filter: blur(10px);
@@ -109,7 +109,7 @@ body {
 }
 
 .card-header {
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+    background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
     color: white;
     border: none;
     font-weight: 600;
@@ -141,7 +141,7 @@ body {
 /* Login Page Styles */
 .login-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 50%, var(--accent-blue) 100%);
+    background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -208,7 +208,7 @@ body {
 
 /* Dashboard Styles */
 .dashboard-header {
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+    background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
     color: white;
     padding: 2rem 0;
     margin-bottom: 2rem;
@@ -263,7 +263,7 @@ body {
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+    background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
 }
 
 .stats-card:hover {
@@ -355,7 +355,7 @@ body {
 }
 
 .table thead th {
-    background: var(--primary-blue);
+    background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
     color: white;
     border: none;
     font-weight: 600;
@@ -398,7 +398,7 @@ body {
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(135deg, #f8fafc 0%, rgba(224, 242, 254, 0.3) 100%);
+    background: linear-gradient(to right, #f8fafc 0%, var(--light-blue) 100%);
     position: relative;
     overflow: hidden;
 }
